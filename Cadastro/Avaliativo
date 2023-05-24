@@ -1,0 +1,67 @@
+class Cliente:
+    def __init__(self, nome):
+        self.nome = nome
+        self.avaliacao = None
+    
+    def realizar_avaliacao(self, nota):
+        self.avaliacao = nota
+    
+    def exibir_detalhes(self):
+        print(f"Nome: {self.nome}")
+        if self.avaliacao is not None:
+            print(f"Avaliação: {self.avaliacao}")
+        else:
+            print("Avaliação: Ainda não avaliado")
+
+# Dicionário para armazenar os clientes
+clientes = {}
+
+# Função para cadastrar um novo cliente
+def cadastrar_cliente():
+    print("Cadastro de Cliente")
+    nome = input("Nome: ")
+
+    cliente = Cliente(nome)
+    clientes[nome] = cliente
+
+    print("Cliente cadastrado com sucesso!")
+
+# Função para avaliar um cliente
+def avaliar_cliente():
+    print("Avaliação de Cliente")
+    nome = input("Digite o nome do cliente: ")
+
+    if nome in clientes:
+        cliente = clientes[nome]
+        nota = float(input("Digite a nota de avaliação (de 1 a 5): "))
+        cliente.realizar_avaliacao(nota)
+        print("Avaliação registrada com sucesso!")
+    else:
+        print("Cliente não encontrado.")
+
+# Função para exibir todos os clientes cadastrados
+def exibir_clientes():
+    print("Lista de Clientes")
+    for cliente in clientes.values():
+        cliente.exibir_detalhes()
+        print("-----------------------")
+
+# Menu principal do programa
+while True:
+    print("===== Programa de Avaliação de Clientes =====")
+    print("1 - Cadastrar novo cliente")
+    print("2 - Avaliar cliente")
+    print("3 - Exibir lista de clientes")
+    print("4 - Sair")
+    opcao = input("Digite a opção desejada: ")
+
+    if opcao == "1":
+        cadastrar_cliente()
+    elif opcao == "2":
+        avaliar_cliente()
+    elif opcao == "3":
+        exibir_clientes()
+    elif opcao == "4":
+        break
+    else:
+        print("Opção inválida. Tente novamente.")
